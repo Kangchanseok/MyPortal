@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bitacademy.myportal.exception.UserDaoException;
 import com.bitacademy.myportal.repository.UserVo;
 import com.bitacademy.myportal.service.UserService;
 
@@ -29,7 +30,13 @@ public class UsersController {
 	public String joinAction(@ModelAttribute UserVo userVo) {
 		System.out.println("가입폼:" + userVo);
 		
-		boolean bSuccess = userServiceImpl.join(userVo);
+		boolean bSuccess = false;
+		try {
+		bSuccess = userServiceImpl.join(userVo);
+		} catch (UserDaoException e) {
+			System.err.println("에러 상황의 UserVo: " + userVo);
+			e.printStackTrace();
+		}
 		
 		if (bSuccess) { // 가입 성공
 			return "redirect:/users/joinsuccess";
