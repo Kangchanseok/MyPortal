@@ -67,4 +67,13 @@
 		
 		
 	</mvc:interceptors>
+	
+	<!-- message source: 반드시 bean id를 message source로 설정해야 -->
+	<bean id="messageSource"
+	class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames" value="messages/messages_ko"></property>
+		<property name="defaultEncoding" value="UTF-8"/>
+		
+	</bean>
+	
 </beans>
