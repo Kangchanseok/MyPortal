@@ -9,27 +9,25 @@ import com.bitacademy.myportal.repository.UserVo;
 
 @Service
 public class UserServiceImpl implements UserService {
-   @Autowired
-   private UserDao userDaoImpl;
-   
-   @Override
-   public boolean join(UserVo vo) throws UserDaoException {
-      int insertedCount = userDaoImpl.insert(vo);
-      // 정상 동작시 insertedCount == 1이여야 함
-      return 1 == insertedCount;
-   }
+	@Autowired
+	private UserDao userDaoImpl;
+	
+	@Override
+	public boolean join(UserVo vo) throws UserDaoException {
+		int insertedCount = userDaoImpl.insert(vo);
+		return 1 == insertedCount;
+	}
 
-   @Override
-   public UserVo getUser(String email, String password) {
-      UserVo userVo = userDaoImpl.selectUser(email,password);
-      
-      return userVo;
-   }
+	@Override
+	public UserVo getUser(String email, String password) {
+		UserVo userVo = userDaoImpl.selectUser(email, password);
+		return userVo;
+	}
 
-   @Override
-   public UserVo getUser(String email) {
-      // TODO Auto-generated method stub
-      return null;
-   }
+	@Override
+	public UserVo getUser(String email) {
+		UserVo userVo = userDaoImpl.selectUser(email);
+		return userVo;
+	}
 
 }

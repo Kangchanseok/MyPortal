@@ -11,6 +11,7 @@
 	src="<c:url value="/javascript/jquery/jquery-3.6.0.js" />"></script>
 <link rel="stylesheet" 
 	href="<c:url value="/css/main.css" />" />
+	
 </head>
 <body>
 	<div id="container">

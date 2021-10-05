@@ -17,24 +17,22 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int insert(UserVo vo) {
 		int count = 0;
+		
 		try {
-		count = sqlSession.insert("users.insert", vo);
+			count = sqlSession.insert("users.insert", vo);
 		} catch (Exception e) {
 			e.printStackTrace();
-			// 상황 정보를 담은 구체적 예외로 전환
-			throw new UserDaoException("회원 가입중 오류가 발생했습니다", vo);
-			
+			//	상황 정보를 담은 구체적 예외로 전환
+			throw new UserDaoException("회원 가입 중 오류!", vo);
 		}
-		
-		//	TODO: 예외처리 필요
 		
 		return count;
 	}
 
 	@Override
 	public UserVo selectUser(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		UserVo vo = sqlSession.selectOne("users.selectUserByEmail", email);
+		return vo;
 	}
 
 	@Override
