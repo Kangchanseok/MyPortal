@@ -4,10 +4,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>My Homepage</title>
+	<title>게시판</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<script 
+	type="text/javascript" 
+	src="<c:url value="/javascript/jquery/jquery-3.6.0.js" />"></script>
+<link rel="stylesheet" 
+	href="<c:url value="/css/guestbook.css" />" />
 </head>
 <body>
+	<div id="container">
+		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
+		<div id="wrapper">
+			<div id="content">
 	<table border="1" width="640">
 		<tr>
 			<td colspan="6"><h3>게시판</h3></td>
@@ -23,17 +33,20 @@
 		<c:forEach items="${list }" var="vo">
 		<tr>
 			<td>${vo.no }</td>
-			<td><a href="">${vo.title }</a></td>
+			<td><a href="<c:url value="/board/view?no=${vo.no }"/>">${vo.title }</a></td>
 			<td>${vo.userName }</td>
 			<td>${vo.hit }</td>
 			<td>${vo.regDate }</td>
-			<td><a href="">삭제</a></td>
+			<td><a href="<c:url value="/board/delete?no=${vo.no }"/>">삭제</a></td>
 		</tr>
 		</c:forEach>
 		
 		<tr>
-			<td colspan="6"><a href="<c:url value="/board/write"/>">글쓰기</a></td>
+			<td colspan="6">
+			<a href="<c:url value="/board/write"/>">글쓰기</a></td>
 		</tr>
+		
 	</table>
+	<%@ include file="/WEB-INF/views/includes/footer.jsp" %>
 </body>
 </html>

@@ -14,6 +14,8 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	private static final String namespace = "users";
+	
 	@Override
 	public int insert(UserVo vo) {
 		int count = 0;
@@ -45,5 +47,29 @@ public class UserDaoImpl implements UserDao {
 		UserVo vo = sqlSession.selectOne("users.selectUserByEmailAndPassword", userMap);
 		return vo;
 	}
+
+	@Override
+	public int updateUser(UserVo vo) {
+		return sqlSession.update("users.updateUser", vo);
+	}
+	
+////	 회원정보 수정
+//	@Override
+//	public void updateUser(UserVo vo) {
+//		sqlSession.update(namespace + ".update", vo);
+//		
+//		
+//	}
+//	
+//	@Override
+//	public void updateUser(String email, String password) {
+//		// Parameter 객체가 없을 때 -> map 사용
+//		Map<String, String> userMap = new HashMap<>();
+//		userMap.put("email", email);
+//		userMap.put("password", password);
+//		
+//		UserVo vo = sqlSession.update("users.updateUser", userMap);
+//		return vo;
+//	}
 
 }

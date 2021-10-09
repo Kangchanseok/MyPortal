@@ -32,12 +32,10 @@ public class GuestbookController {
 		System.out.println("FORM DATA:" + vo);
 		
 		boolean bSuccess = guestbookServiceImpl.writeMessage(vo);
-		System.out.println("방명록 삽입성공?" + bSuccess);
+		System.out.println("방명록 삽입 성공? " + bSuccess);
 		
-		// 리다이렉트
+		//	리다이렉트
 		return "redirect:/guestbook";
-		
-		
 	}
 	
 	@RequestMapping(value="/delete/{no}", method=RequestMethod.GET)
@@ -49,11 +47,11 @@ public class GuestbookController {
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String delete(@ModelAttribute GuestbookVo vo) {
 		boolean bSuccess = guestbookServiceImpl.deleteMessage(vo);
-	
-	if(bSuccess) {
-		return "redirect:/guestbook";
-	} else {
-		return "redirect:/guestbook/delete" + vo.getNo();
+		
+		if (bSuccess) {	//	삭제 성공
+			return "redirect:/guestbook";
+		}
+		//	실패시
+		return "redirect:/guestbook/delete/" + vo.getNo();
 	}
-}
 }

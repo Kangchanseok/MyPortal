@@ -30,4 +30,12 @@
 	FROM users
 	WHERE email=#{value}	
 	</select>
+	
+	<!-- 회원정보 수정! -->
+	<update id="updateUser" parameterType="userVo">
+		UPDATE users
+		SET password = #{password},
+		email=#{email}
+		WHERE no=#{no}
+	</update>
 </mapper>

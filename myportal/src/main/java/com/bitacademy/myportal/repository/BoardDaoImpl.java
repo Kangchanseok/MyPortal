@@ -10,6 +10,9 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	
+	private String namespace = "board";
+	
 	@Override
 	public List<BoardVo> selectAll() {
 		List<BoardVo> list = sqlSession.selectList("board.selectAll");
@@ -24,21 +27,25 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public BoardVo getContent(Long no) {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardVo view(Long no) {
+		
+		return sqlSession.selectOne(namespace + ".view", no);
+		
 	}
 
 	@Override
-	public int update(BoardVo boardVo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Long update(BoardVo boardVo) {
+		return (long) sqlSession.update(namespace + ".update", boardVo);
 	}
 
 	@Override
-	public int delete(Long no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void delete(Long no)  {
+		
+		sqlSession.delete(namespace + ".delete", no);
+	}
+	@Override
+	public Long boardHit(Long hit)  {
+		return (long) sqlSession.update("board.boardHit", hit);
 	}
 
 }

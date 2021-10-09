@@ -35,6 +35,8 @@ public class UsersController {
 	
 	@Autowired
 	private UserService userServiceImpl;
+
+	
 	
 	@RequestMapping(value={"", "/", "/join"}, 
 			method=RequestMethod.GET)
@@ -150,4 +152,48 @@ public class UsersController {
 		
 		return map;
 	}
+	
+	// 회원정보 수정 get
+	@RequestMapping(value = "/updateform", method = RequestMethod.GET)
+	public String getUpdateUser() {
+		return "users/updateform";
+	}
+	
+	// 회원정보 수정 post
+	@RequestMapping(value="/updateform", method = RequestMethod.POST)
+	public String postUpdateUser(@ModelAttribute UserVo userVo,
+			@RequestParam(value="email", required=false)
+				String email,
+			@RequestParam(value="password", required=false)
+				String password,
+			HttpSession session) {
+		
+		if (email.length() == 0 || password.length() == 0) {
+//			System.err.println("정보 수정 불가!");
+			logger.debug("정보 수정 불가!");
+			return "redirect:/users/updateform";
+		}
+		
+		System.out.println("정보 수정" + userVo);
+		
+		boolean bSuccess = false;
+		try {
+			bSuccess = userServiceImpl.modify(userVo);
+		} catch (UserDaoException e) {
+//			System.err.println("에러상황의 UserVo:" + userVo);
+			logger.debug("에러 상황의  UserVo:" + userVo);
+			e.printStackTrace();
+		}
+		
+		if (bSuccess) {	// 성공
+			UserVo authUser = (UserVo) session.getAttribute("authUser");
+			authUser.setEmail(email);
+
+			logger.debug("현재 세션 이름:" + authUser.getEmail());
+			
+			return "redirect:/";
+		}
+		return "redirect:/users/updateform";
+	}
+	
 }

@@ -27,4 +27,36 @@
 	FROM board b, users u
 	WHERE b.user_no = u.no
 	</select>
+	<!--  게시물 조회 -->
+	<select id="view" resultType="boardVo">
+		SELECT
+		no,
+		title,
+		content
+		FROM board 
+	    WHERE no=#{no} 
+		
+	</select>
+	
+	<!-- 게시물 수정 -->
+	<update id="update" parameterType="boardVo">
+	UPDATE board
+	SET title = #{title}, 
+	content = #{content}
+	WHERE no = #{no}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delete" parameterType="long">
+		DELETE
+		FROM board
+		WHERE no = #{no}
+	</delete>
+	
+	<!-- 조회수 증가 -->
+	<update id="boardHit" parameterType="long">
+		UPDATE board
+		SET hit = hit + 1
+		WHERE no=#{no}
+	</update>
 </mapper>

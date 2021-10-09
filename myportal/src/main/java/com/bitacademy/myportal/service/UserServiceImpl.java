@@ -29,5 +29,12 @@ public class UserServiceImpl implements UserService {
 		UserVo userVo = userDaoImpl.selectUser(email);
 		return userVo;
 	}
+	
+	// 회원정보 수정
+	@Override
+	public boolean modify(UserVo vo) {
+		int updatedCount = userDaoImpl.updateUser(vo);
+		return 1 == updatedCount;
+	}
 
 }

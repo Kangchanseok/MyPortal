@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -56,5 +57,35 @@ public class BoardController {
 		boardServiceImpl.write(boardVo);
 		
 		return "redirect:/board/list";
+	}
+	
+	// 게시물 조회
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public String getView( Long no, Model model) {
+		BoardVo vo = boardServiceImpl.view(no); 
+		model.addAttribute("vo",vo);
+		return "board/view";
+	}
+	// 게시물 수정 get
+	@RequestMapping(value = "/update/{no}", method=RequestMethod.GET)
+	public String updateform(@PathVariable Long no,Model model) {
+		BoardVo vo = boardServiceImpl.view(no);
+		model.addAttribute("vo", vo);
+		return "board/update";
+	}
+	// 게시물 수정 post
+	@RequestMapping(value="/update/{no}", method=RequestMethod.POST)
+	public String update(@ModelAttribute BoardVo boardVo) {
+		System.out.println(boardVo.toString());
+		boardServiceImpl.update(boardVo);
+		return "redirect:/board";
+	}
+		
+	// 게시물 삭제 
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String postDelete(Long no) {
+		boardServiceImpl.delete(no);
+		return "redirect:/board";
+		
 	}
 }

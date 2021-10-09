@@ -19,9 +19,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVo getContent(Long no) {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardVo view(Long no) {
+//		boardDaoImpl.boardHit(no);
+		return boardDaoImpl.view(no);
 	}
 
 	@Override
@@ -32,8 +32,19 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public boolean update(BoardVo vo) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		Long updatedCount = boardDaoImpl.update(vo);
+		return 1 == updatedCount;
+	}
+	
+	@Override
+	public void boardHit(Long hit) {
+		boardDaoImpl.boardHit(hit);
 	}
 
+	@Override
+	public void delete(Long no) {
+		boardDaoImpl.delete(no);
+	}
+	
 }

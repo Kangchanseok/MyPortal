@@ -8,10 +8,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원 가입폼</title>
+	
+<link rel="stylesheet" 
+	href="<c:url value="/css/user.css" />" />
 	<script src="<c:url value="/javascript/jquery/jquery-3.6.0.js" />"></script>
 	<script src="<c:url value="/javascript/users.js" />"></script>
 </head>
 <body>
+<div id="container">
+		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
+		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
+		<div id="wrapper">
+			<div id="content">
 	<h1>회원 가입</h1>
 	
 	<!-- form
@@ -74,6 +82,6 @@
 	
 	<!-- /form -->
 	</form:form>
-	
+	<%@ include file="/WEB-INF/views/includes/footer.jsp" %>
 </body>
 </html>

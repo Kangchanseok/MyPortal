@@ -3,8 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>My Homepage</title>
+	<title>글 작성</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<script 
+	type="text/javascript" 
+	src="<c:url value="/javascript/jquery/jquery-3.6.0.js" />">
+	</script>
+<link rel="stylesheet" 
+	href="/css/guestbook.css" />
 </head>
 <body>
 	<form method="post" action="">
@@ -27,7 +33,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<a href="">취소</a>
+					<a href="/myportal/board">취소</a>
 					<input type="submit" value="등록">
 				</td>	
 			</tr>
