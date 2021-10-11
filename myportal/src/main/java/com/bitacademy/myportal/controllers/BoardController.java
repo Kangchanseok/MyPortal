@@ -75,7 +75,7 @@ public class BoardController {
 	}
 	// 게시물 수정 post
 	@RequestMapping(value="/update/{no}", method=RequestMethod.POST)
-	public String update(@ModelAttribute BoardVo boardVo) {
+	public String update(@PathVariable String no,@ModelAttribute BoardVo boardVo) {
 		System.out.println(boardVo.toString());
 		boardServiceImpl.update(boardVo);
 		return "redirect:/board";

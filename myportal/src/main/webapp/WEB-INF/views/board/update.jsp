@@ -8,6 +8,7 @@
 </head>
 <body>
 	<form method="POST" action="<c:url value="/board/update/${vo.no}"/>">
+	<!--  form action="<c:url value="/board/update/${vo.no}" />" method="post"-->
 		<table border="1" width="640">
 			<tr>
 				<td colspan="2"><h3>게시판</h3></td>
@@ -15,7 +16,10 @@
 			<tr>
 				<th colspan="2">글수정</th>
 			</tr>
-			
+			<tr>
+				<td>글번호</td>
+				<td><input type="text" name="no" value="${vo.no }" readonly ></td>
+			</tr>
 			<tr>
 				<td>제목</td>
 				<td><input type="text" name="title" value="${vo.title }"></td>
